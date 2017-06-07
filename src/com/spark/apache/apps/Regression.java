@@ -1,10 +1,5 @@
 package com.spark.apache.apps;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import scala.Tuple2;
-
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -16,13 +11,21 @@ import org.apache.spark.mllib.regression.LabeledPoint;
 import org.apache.spark.mllib.tree.DecisionTree;
 import org.apache.spark.mllib.tree.model.DecisionTreeModel;
 import org.apache.spark.mllib.util.MLUtils;
+import scala.Tuple2;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by baohuaw on 2017/6/7.
  */
 public class Regression {
     public static void main(String[] args) {
-        SparkConf sparkConf = new SparkConf().setAppName("JavaDecisionTreeRegressionExample");
+        SparkConf sparkConf = new SparkConf().setAppName("JavaDecisionTreeRegressionExample")
+                .setMaster("local[4]")
+//                .setMaster("spark://172.1.1.1:7077")
+                .set("spark.executor.memory", "1g");
+        ;
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
 // Load and parse the data file.
