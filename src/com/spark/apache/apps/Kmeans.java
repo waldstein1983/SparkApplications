@@ -18,6 +18,7 @@ public class Kmeans {
                 .config("spark.master", "local")
                 .getOrCreate();
         // Loads data.
+//        spark.read().format()
         Dataset<Row> dataset = spark.read().format("libsvm").load("data/mllib/sample_kmeans_data.txt");
 
 // Trains a k-means model.
